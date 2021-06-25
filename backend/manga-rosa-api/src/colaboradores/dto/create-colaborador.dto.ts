@@ -1,4 +1,5 @@
 import {IsEmail, IsNotEmpty, IsOptional, Matches} from 'class-validator'
+import { cpfRegex, telefoneRegex } from 'src/utils/regex.utils';
 
 export class CreateColaboradorDto {
     @IsNotEmpty({message: 'O nome precisa ser fornecido'})
@@ -7,11 +8,11 @@ export class CreateColaboradorDto {
     @IsEmail({},{message: 'O email fornecido é inválido'})
     email: string;
     
-    @Matches(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, {message: 'O cpf informado está em formato inválido'})
+    @Matches(cpfRegex, {message: 'O cpf informado está em formato inválido'})
     cpf: string;
 
     @IsOptional()
-    @Matches(/^\([1-9]{2}\) (?:[2-8]|9[1-9])[0-9]{3}\-[0-9]{4}$/ , {message: 'Telefone inserido é inválido'})
+    @Matches(telefoneRegex , {message: 'Telefone inserido é inválido'})
     celular: string;
 
     @IsOptional()
