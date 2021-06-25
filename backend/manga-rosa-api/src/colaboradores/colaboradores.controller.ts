@@ -13,7 +13,7 @@ export class ColaboradoresController {
     return this.colaboradoresService.create(createColaboradorDto);
   }
 
-  @Get()
+  @Get('registros')
   findAll() {
     return this.colaboradoresService.findAll();
   }
