@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Conhecimento } from "src/conhecimentos/conhecimento.entity";
+import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Colaborador {
@@ -11,7 +12,6 @@ export class Colaborador {
     @Column()
     email: string;
 
-
     @Column({unique: true})
     cpf: string;
 
@@ -20,4 +20,8 @@ export class Colaborador {
 
     @Column({default: false})
     isValidado: boolean;
+
+    @ManyToMany(() => Conhecimento)
+    @JoinTable()
+    conhecimentos: Conhecimento[];
 }
