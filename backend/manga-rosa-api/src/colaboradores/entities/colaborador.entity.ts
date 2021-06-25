@@ -19,7 +19,7 @@ export class Colaborador {
     celular: string;
 
     @Column({default: false})
-    isValidado: boolean;
+    validado: boolean;
 
     @ManyToMany(() => Conhecimento)
     @JoinTable()

@@ -27,7 +27,7 @@ export class ColaboradoresService {
     colaborador.email = email;
     colaborador.cpf = cpf;
     colaborador.celular = celular;
-    colaborador.isValidado = validado;
+    colaborador.validado = validado;
     colaborador.conhecimentos = conhecimentos;
 
     try {
