@@ -1,4 +1,4 @@
-import {IsEmail, IsNotEmpty, IsOptional, Matches} from 'class-validator'
+import {ArrayMaxSize, ArrayMinSize, IsEmail, IsNotEmpty, IsOptional, Matches, MaxLength} from 'class-validator'
 import { cpfRegex, telefoneRegex } from 'src/utils/regex.utils';
 
 export class CreateColaboradorDto {
@@ -17,4 +17,9 @@ export class CreateColaboradorDto {
 
     @IsOptional()
     validado: boolean;
+
+    @IsOptional()
+    @ArrayMinSize(1 ,{message: 'Quantidade mínima de conhecimentos deve ser 1'})
+    @ArrayMaxSize(3 ,{message: 'Quantidade máxima de conhecimentos é 3'})
+    idsConhecimentos: Array<number>;
 }
