@@ -38,8 +38,9 @@ export class ColaboradoresService {
     }
   }
 
-  findAll() {
-    return `This action returns all colaboradores`;
+  async findAll() {
+    const colaboradores = await this.colaboradoresRepository.find({order: {nome: 'ASC'}})
+    return colaboradores;
   }
 
   findOne(id: number) {
