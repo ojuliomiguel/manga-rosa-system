@@ -3,7 +3,7 @@ import { ColaboradoresService } from './colaboradores.service';
 import { CreateColaboradorDto } from './dto/create-colaborador.dto';
 import { UpdateColaboradorDto } from './dto/update-colaborador.dto';
 
-@Controller('*')
+@Controller('colaboradores')
 export class ColaboradoresController {
   constructor(private readonly colaboradoresService: ColaboradoresService) {}
 
