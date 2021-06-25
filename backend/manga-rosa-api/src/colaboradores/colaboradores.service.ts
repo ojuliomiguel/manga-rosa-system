@@ -1,5 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Conhecimento } from 'src/conhecimentos/conhecimento.entity';
 import { Repository } from 'typeorm';
 import { CreateColaboradorDto } from './dto/create-colaborador.dto';
 import { UpdateColaboradorDto } from './dto/update-colaborador.dto';
@@ -11,17 +12,23 @@ export class ColaboradoresService {
   constructor(
     @InjectRepository(Colaborador)
     private colaboradoresRepository: Repository<Colaborador>,
+    @InjectRepository(Conhecimento)
+    private conhecimentossRepository: Repository<Conhecimento>
   ) {}
 
   async create(createColaboradorDto: CreateColaboradorDto) {
     const colaborador = new Colaborador();
-    const {nome, email, cpf, celular, validado} = createColaboradorDto;
+  
+    const {nome, email, cpf, celular, validado, idsConhecimentos} = createColaboradorDto;
+
+    const conhecimentos = await this.conhecimentossRepository.findByIds(idsConhecimentos)
 
     colaborador.nome = nome;
     colaborador.email = email;
     colaborador.cpf = cpf;
     colaborador.celular = celular;
     colaborador.isValidado = validado;
+    colaborador.conhecimentos = conhecimentos;
 
     try {
       await this.colaboradoresRepository.save(colaborador) 
