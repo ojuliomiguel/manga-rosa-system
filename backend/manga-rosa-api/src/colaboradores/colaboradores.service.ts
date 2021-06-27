@@ -34,7 +34,12 @@ export class ColaboradoresService {
       await this.colaboradoresRepository.save(colaborador) 
       return {message: 'Colaborador cadastrado'};  
     } catch (error) {
-      throw new BadRequestException(error.sqlMessage) 
+      if (error.sqlMessage.includes('Duplicate entry')) {
+        throw new BadRequestException('Erro: CPF duplicado') 
+      } else {
+        throw new BadRequestException(error.sqlMessage) 
+      }
+      
     }
   }
 
