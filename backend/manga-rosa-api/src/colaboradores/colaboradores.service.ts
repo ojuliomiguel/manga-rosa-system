@@ -44,8 +44,13 @@ export class ColaboradoresService {
   }
 
   async findAll() {
-    const colaboradores = await this.colaboradoresRepository.find({order: {nome: 'ASC'}})
-    return colaboradores;
+    const colaboradores = await this.colaboradoresRepository
+      .createQueryBuilder('colaborador') 
+      .leftJoinAndSelect('colaborador.conhecimentos', 'conhecimento')
+      .orderBy('colaborador.nome', 'ASC')
+      .getMany()
+    
+      return colaboradores;
   }
 
   findOne(id: number) {
